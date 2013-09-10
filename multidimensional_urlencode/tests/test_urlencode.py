@@ -1,5 +1,7 @@
 import urllib
 
+import pytest
+
 from multidimensional_urlencode import urlencode
 
 
@@ -22,3 +24,9 @@ def test_with_list_value():
     d = {'a': {"b": [1, 2, 3]}}
     expected = "a[b][]=1&a[b][]=2&a[b][]=3"
     assert urllib.unquote(urlencode(d)) == expected
+
+
+def test_with_non_dict():
+    """Verify that we raise an exception when passing a non-dict."""
+    with pytest.raises(TypeError):
+        urlencode("e")
