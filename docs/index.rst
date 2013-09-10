@@ -25,6 +25,19 @@ multidimensional_urlencode lets you url encode a multidimensional dict:
     >>> urllib.unquote(e)
     'a[b][d]=e&a[b][c]=1&a[b][c]=2&a[b][c]=3'
 
+Development
+===========
+
+Install requirements::
+
+    $ pip install -r requirements-dev.txt
+
+Run tests::
+
+    $ py.test
+    $ # or
+    $ tox
+
 
 Indices and tables
 ==================

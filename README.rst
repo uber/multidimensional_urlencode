@@ -3,6 +3,9 @@ multidimensional_urlencode
 
 Python library to urlencode a multidimensional dict
 
+.. image:: https://travis-ci.org/uber/multidimensional_urlencode.png?branch=master
+    :target: https://travis-ci.org/uber/multidimensional_urlencode
+
 Quick Start
 ===========
 
@@ -18,3 +21,18 @@ multidimensional_urlencode lets you url encode a multidimensional dict:
 
 Documentation
 =============
+
+[Documentation can be found here](http://multidimensional-urlencode.readthedocs.org/en/latest/)
+
+Authors
+=======
+
+* Sam Marcellus <marcellus@uber.com>
+* Charles-Axel Dein <charles@uber.com>
+
+License
+=======
+
+Available under the MIT License.
+
+Copyright Uber 2013
