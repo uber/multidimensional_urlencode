@@ -48,7 +48,4 @@ setup(
         'Topic :: Software Development :: Libraries :: Application Frameworks',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         ],
-    extras_require={
-        'testing': ['pytest'],
-    }
 )
