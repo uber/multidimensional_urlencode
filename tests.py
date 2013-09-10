@@ -17,3 +17,9 @@ class TestUrlEncode(TestCase):
         d = {'a': 'b', 'c': {'d': 'e'}}
         expected = urllib.quote("a=b&c[d]=e", safe="=/&")
         self.assertEqual(urlencode(d), expected)
+
+    def test_with_list_value(self):
+        """Verify that urlencode works with list value."""
+        d = {'a': {"b": [1, 2, 3]}}
+        expected = urllib.quote("a[b]=1&a[b]=2&a[b]=3", safe="=/&")
+        self.assertEqual(urlencode(d), expected)

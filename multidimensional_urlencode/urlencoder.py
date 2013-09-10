@@ -7,6 +7,8 @@ def flatten(d):
 
     >>> flatten({"a": "b"})
     [['a', 'b']]
+    >>> flatten({"a": [1, 2, 3]})
+    [['a', [1, 2, 3]]]
     >>> flatten({"a": {"b": "c"}})
     [['a', 'b', 'c']]
     >>> flatten({"a": {"b": {"c": "e"}}})
@@ -54,7 +56,7 @@ def urlencode(params):
 
     # Not doing duck typing here. Will make debugging easier.
     if not isinstance(params, dict):
-        raise TypeError("Only dict are supported for now.")
+        raise TypeError("Only dicts are supported.")
 
     params = flatten(params)
 
@@ -63,4 +65,4 @@ def urlencode(params):
         value = param.pop()
         url_params[parametrize(param)] = value
 
-    return urllib.urlencode(url_params)
+    return urllib.urlencode(url_params, doseq=True)
