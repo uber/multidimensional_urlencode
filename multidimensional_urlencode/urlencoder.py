@@ -1,5 +1,4 @@
 import urllib
-from functools import reduce
 
 
 def flatten(d):

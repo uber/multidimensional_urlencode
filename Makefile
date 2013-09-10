@@ -1,6 +1,7 @@
 all: develop test release
 
 test:
+	flake8 multidimensional_urlencode
 	py.test
 
 develop:
