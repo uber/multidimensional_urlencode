@@ -20,5 +20,5 @@ def test_two():
 def test_with_list_value():
     """Verify that urlencode works with list value."""
     d = {'a': {"b": [1, 2, 3]}}
-    expected = urllib.quote("a[b]=1&a[b]=2&a[b]=3", safe="=/&")
-    assert urlencode(d) == expected
+    expected = "a[b][]=1&a[b][]=2&a[b][]=3"
+    assert urllib.unquote(urlencode(d)) == expected

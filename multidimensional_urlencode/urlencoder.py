@@ -63,6 +63,11 @@ def urlencode(params):
     url_params = {}
     for param in params:
         value = param.pop()
-        url_params[parametrize(param)] = value
+
+        name = parametrize(param)
+        if isinstance(value, (list, tuple)):
+            name += "[]"
+
+        url_params[name] = value
 
     return urllib.urlencode(url_params, doseq=True)

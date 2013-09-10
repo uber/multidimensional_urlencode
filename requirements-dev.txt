@@ -1,1 +1,3 @@
 nose==1.3.0
+zest.releaser==3.46
+Sphinx==1.2b1
