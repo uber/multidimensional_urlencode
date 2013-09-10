@@ -1,4 +1,4 @@
-all: develop test prerelease release
+all: develop test release
 
 test:
 	py.test
@@ -6,8 +6,5 @@ test:
 develop:
 	python setup.py develop
 
-prerelease:
-	prerelease
-
 release:
-	release
+	prerelease && release
