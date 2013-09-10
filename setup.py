@@ -36,8 +36,13 @@ setup(
     include_package_data=True,
     platforms='any',
     test_suite='multidimensional_urlencode.tests.test_urlencode',
+    zip_safe=False,
+    keywords=["urlencode", "params", "multidimensional"],
     classifiers=[
         'Programming Language :: Python',
+        "Programming Language :: Python :: 2",
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
