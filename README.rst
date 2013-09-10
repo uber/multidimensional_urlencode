@@ -22,7 +22,7 @@ multidimensional_urlencode lets you url encode a multidimensional dict:
 Documentation
 =============
 
-[Documentation can be found here](http://multidimensional-urlencode.readthedocs.org/en/latest/)
+`Documentation can be found here <http://multidimensional-urlencode.readthedocs.org/en/latest/>`_
 
 Authors
 =======
