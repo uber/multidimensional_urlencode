@@ -13,18 +13,22 @@ def flatten(d):
     [['a', 'b', 'c', 'e']]
     >>> flatten({"a": {"b": "c", "d": "e"}})
     [['a', 'b', 'c'], ['a', 'd', 'e']]
+    >>> flatten({"a": {"b": "c", "d": "e"}, "b": {"c": "d"}})
+    [['a', 'b', 'c'], ['a', 'd', 'e'], ['b', 'c', 'd']]
 
     """
 
     if not isinstance(d, dict):
-        return d
+        return [[d]]
 
     returned = []
     for key, value in d.items():
         # Each key, value is treated as a row.
-        current_row = [key]
-        current_row.extend(flatten(value))
-        returned.append(current_row)
+        nested = flatten(value)
+        for nest in nested:
+            current_row = [key]
+            current_row.extend(nest)
+            returned.append(current_row)
 
     return returned
 
@@ -56,7 +60,7 @@ def urlencode(params):
 
     url_params = {}
     for param in params:
-        value = params.pop()
-        url_params[parametrize(params)] = value
+        value = param.pop()
+        url_params[parametrize(param)] = value
 
     return urllib.urlencode(url_params)
