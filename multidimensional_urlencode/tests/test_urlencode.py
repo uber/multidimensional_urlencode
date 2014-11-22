@@ -12,6 +12,13 @@ def test_basic():
     assert urlencode(d) == expected
 
 
+def test_key_types():
+    """Verify that urlencode works with key type 'int'."""
+    d = {1: {2: {3: 4}}}
+    expected = urllib.quote("1[2][3]=4", safe="=/&")
+    assert urlencode(d) == expected
+
+
 def test_two():
     """Verify that urlencode works with two params."""
     d = {'a': 'b', 'c': {'d': 'e'}}

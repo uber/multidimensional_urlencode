@@ -45,8 +45,8 @@ def parametrize(params):
     'a[b][c]'
 
     """
-    returned = params[0]
-    returned += "".join("[" + p + "]" for p in params[1:])
+    returned = str(params[0])
+    returned += "".join("[" + str(p) + "]" for p in params[1:])
     return returned
 
 
