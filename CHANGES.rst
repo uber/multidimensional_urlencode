@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.0.3 (unreleased)
+0.0.3 (2014-12-06)
 ------------------
 
 - Fix encoding ``int`` (thanks to @foxx).
