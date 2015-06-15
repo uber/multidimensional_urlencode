@@ -22,9 +22,9 @@ class PyTest(TestCommand):
         sys.exit(errcode)
 
 setup(
-    name='ud-multidimensional_urlencode',
-    version='0.0.3.dev1',
-    url='https://github.com/udemy/multidimensional_urlencode',
+    name='multidimensional_urlencode',
+    version='0.0.3',
+    url='https://github.com/uber/multidimensional_urlencode',
     license='MIT',
     author='Sam Marcellus, Charles-Axel Dein',
     tests_require=['pytest'],
