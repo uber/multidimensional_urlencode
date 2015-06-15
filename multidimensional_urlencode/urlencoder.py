@@ -1,4 +1,4 @@
-import urllib
+from urllib.parse import urlencode
 
 
 def flatten(d):
@@ -69,4 +69,4 @@ def urlencode(params):
 
         url_params[name] = value
 
-    return urllib.urlencode(url_params, doseq=True)
+    return urlencode(url_params, doseq=True)

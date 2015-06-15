@@ -1,1 +1,1 @@
-from urlencoder import urlencode  # noqa
+from .urlencoder import urlencode  # noqa
