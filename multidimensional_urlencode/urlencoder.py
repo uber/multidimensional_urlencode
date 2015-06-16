@@ -1,7 +1,7 @@
 try:
-    from urllib.parse import urlencode
+    from urllib.parse import urlencode as urllib_urlencode
 except ImportError:
-    from urllib import urlencode
+    from urllib import urlencode as urllib_urlencode
 
 
 def flatten(d):
@@ -26,7 +26,7 @@ def flatten(d):
         return [[d]]
 
     returned = []
-    for key, value in d.items():
+    for key, value in sorted(list(d.items())):
         # Each key, value is treated as a row.
         nested = flatten(value)
         for nest in nested:
@@ -62,7 +62,7 @@ def urlencode(params):
 
     params = flatten(params)
 
-    url_params = {}
+    url_params = []
     for param in params:
         value = param.pop()
 
@@ -70,6 +70,6 @@ def urlencode(params):
         if isinstance(value, (list, tuple)):
             name += "[]"
 
-        url_params[name] = value
+        url_params.append((name, value))
 
-    return urlencode(url_params, doseq=True)
+    return urllib_urlencode(url_params, doseq=True)

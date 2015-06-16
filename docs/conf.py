@@ -52,7 +52,7 @@ import pkg_resources
 try:
     release = pkg_resources.get_distribution('multidimensional_urlencode').version
 except pkg_resources.DistributionNotFound:
-    print "Distribution information not found. Run 'setup.py develop'"
+    print("Distribution information not found. Run 'setup.py develop'")
     sys.exit(1)
 del pkg_resources
 version = '.'.join(release.split('.')[:3])
