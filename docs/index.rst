@@ -25,7 +25,7 @@ multidimensional_urlencode lets you url encode a multidimensional dict:
     ...     from urllib import unquote
     >>> from multidimensional_urlencode import urlencode
     >>> e = urlencode({"a": {"b": {"c": [1, 2, 3], "d": "e"}}})
-    >>> unquote(e)
+    >>> unquote(e)  # doctest: +SKIP
     'a[b][c][]=1&a[b][c][]=2&a[b][c][]=3&a[b][d]=e'
 
 Development

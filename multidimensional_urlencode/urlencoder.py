@@ -15,9 +15,9 @@ def flatten(d):
     [['a', 'b', 'c']]
     >>> flatten({"a": {"b": {"c": "e"}}})
     [['a', 'b', 'c', 'e']]
-    >>> flatten({"a": {"b": "c", "d": "e"}})
+    >>> sorted(flatten({"a": {"b": "c", "d": "e"}}))
     [['a', 'b', 'c'], ['a', 'd', 'e']]
-    >>> flatten({"a": {"b": "c", "d": "e"}, "b": {"c": "d"}})
+    >>> sorted(flatten({"a": {"b": "c", "d": "e"}, "b": {"c": "d"}}))
     [['a', 'b', 'c'], ['a', 'd', 'e'], ['b', 'c', 'd']]
 
     """
@@ -26,7 +26,7 @@ def flatten(d):
         return [[d]]
 
     returned = []
-    for key, value in sorted(list(d.items())):
+    for key, value in list(d.items()):
         # Each key, value is treated as a row.
         nested = flatten(value)
         for nest in nested:
@@ -62,7 +62,7 @@ def urlencode(params):
 
     params = flatten(params)
 
-    url_params = []
+    url_params = {}
     for param in params:
         value = param.pop()
 
@@ -70,6 +70,6 @@ def urlencode(params):
         if isinstance(value, (list, tuple)):
             name += "[]"
 
-        url_params.append((name, value))
+        url_params[name] = value
 
     return urllib_urlencode(url_params, doseq=True)

@@ -27,7 +27,7 @@ def test_two():
     """Verify that urlencode works with two params."""
     d = {'a': 'b', 'c': {'d': 'e'}}
     expected = quote("a=b&c[d]=e", safe="=/&")
-    assert urlencode(d) == expected
+    assert '&'.join(sorted(urlencode(d).split('&'))) == expected
 
 
 def test_with_list_value():
