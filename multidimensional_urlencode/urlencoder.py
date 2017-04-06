@@ -3,6 +3,8 @@ try:
 except ImportError:
     from urllib import urlencode as urllib_urlencode
 
+from collections import OrderedDict
+
 
 def flatten(d):
     """Return a dict as a list of lists.
@@ -15,18 +17,17 @@ def flatten(d):
     [['a', 'b', 'c']]
     >>> flatten({"a": {"b": {"c": "e"}}})
     [['a', 'b', 'c', 'e']]
-    >>> sorted(flatten({"a": {"b": "c", "d": "e"}}))
+    >>> flatten({"a": {"b": "c", "d": "e"}})
     [['a', 'b', 'c'], ['a', 'd', 'e']]
-    >>> sorted(flatten({"a": {"b": "c", "d": "e"}, "b": {"c": "d"}}))
+    >>> flatten({"a": {"b": "c", "d": "e"}, "b": {"c": "d"}})
     [['a', 'b', 'c'], ['a', 'd', 'e'], ['b', 'c', 'd']]
-
     """
 
     if not isinstance(d, dict):
         return [[d]]
 
     returned = []
-    for key, value in d.items():
+    for key, value in sorted(d.items()):
         # Each key, value is treated as a row.
         nested = flatten(value)
         for nest in nested:
@@ -62,7 +63,7 @@ def urlencode(params):
 
     params = flatten(params)
 
-    url_params = {}
+    url_params = OrderedDict()
     for param in params:
         value = param.pop()
 
