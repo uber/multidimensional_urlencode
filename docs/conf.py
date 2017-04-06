@@ -41,7 +41,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'multidimensional_urlencode'
-copyright = u'2013, Sam Marcellus, Charles-Axel Dein'
+copyright = u'2017, Sam Marcellus, Charles-Axel Dein'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

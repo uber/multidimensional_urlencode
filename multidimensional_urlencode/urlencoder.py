@@ -26,7 +26,7 @@ def flatten(d):
         return [[d]]
 
     returned = []
-    for key, value in list(d.items()):
+    for key, value in d.items():
         # Each key, value is treated as a row.
         nested = flatten(value)
         for nest in nested:
