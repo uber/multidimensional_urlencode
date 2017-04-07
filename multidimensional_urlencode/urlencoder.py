@@ -1,4 +1,9 @@
-import urllib
+try:
+    from urllib.parse import urlencode as urllib_urlencode
+except ImportError:
+    from urllib import urlencode as urllib_urlencode
+
+from collections import OrderedDict
 
 
 def flatten(d):
@@ -16,14 +21,13 @@ def flatten(d):
     [['a', 'b', 'c'], ['a', 'd', 'e']]
     >>> flatten({"a": {"b": "c", "d": "e"}, "b": {"c": "d"}})
     [['a', 'b', 'c'], ['a', 'd', 'e'], ['b', 'c', 'd']]
-
     """
 
     if not isinstance(d, dict):
         return [[d]]
 
     returned = []
-    for key, value in d.items():
+    for key, value in sorted(d.items()):
         # Each key, value is treated as a row.
         nested = flatten(value)
         for nest in nested:
@@ -59,7 +63,7 @@ def urlencode(params):
 
     params = flatten(params)
 
-    url_params = {}
+    url_params = OrderedDict()
     for param in params:
         value = param.pop()
 
@@ -69,4 +73,4 @@ def urlencode(params):
 
         url_params[name] = value
 
-    return urllib.urlencode(url_params, doseq=True)
+    return urllib_urlencode(url_params, doseq=True)
