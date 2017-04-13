@@ -1,4 +1,4 @@
-all: develop test release
+all: develop test
 
 test: develop lint
 	py.test
