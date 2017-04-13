@@ -23,7 +23,7 @@ class PyTest(TestCommand):
 
 setup(
     name='multidimensional_urlencode',
-    version='0.0.3',
+    version='0.0.4',
     url='https://github.com/uber/multidimensional_urlencode',
     license='MIT',
     author='Sam Marcellus, Charles-Axel Dein',
