@@ -41,3 +41,17 @@ def test_with_non_dict():
     """Verify that we raise an exception when passing a non-dict."""
     with pytest.raises(TypeError):
         urlencode("e")
+
+
+def test_no_array_braces():
+    """Verify that array braces can be left off."""
+    d = {'a': {"b": [1, 2, 3]}}
+    expected = "a[b]=1&a[b]=2&a[b]=3"
+    assert unquote(urlencode(d, array_braces=False)) == expected
+
+
+def test_encode_list_key():
+    """Verify that list indexes are explicitly added."""
+    d = {'a': {"b": [1, 2, 3]}}
+    expected = "a[b][0]=1&a[b][1]=2&a[b][2]=3"
+    assert unquote(urlencode(d, encode_list_key=True)) == expected

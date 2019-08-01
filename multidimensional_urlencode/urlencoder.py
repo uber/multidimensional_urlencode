@@ -6,7 +6,7 @@ except ImportError:
 from collections import OrderedDict
 
 
-def flatten(d):
+def flatten(d, encode_list_key=False):
     """Return a dict as a list of lists.
 
     >>> flatten({"a": "b"})
@@ -23,19 +23,25 @@ def flatten(d):
     [['a', 'b', 'c'], ['a', 'd', 'e'], ['b', 'c', 'd']]
     """
 
-    if not isinstance(d, dict):
+    if isinstance(d, dict) or (encode_list_key and isinstance(d, list)):
+        returned = []
+
+        if isinstance(d, list) and encode_list_key:
+            inner = [(x, d[x]) for x in range(len(d))]
+        else:
+            inner = sorted(d.items())
+
+        for key, value in inner:
+            # Each key, value is treated as a row.
+            nested = flatten(value, encode_list_key)
+            for nest in nested:
+                current_row = [key]
+                current_row.extend(nest)
+                returned.append(current_row)
+
+        return returned
+    else:
         return [[d]]
-
-    returned = []
-    for key, value in sorted(d.items()):
-        # Each key, value is treated as a row.
-        nested = flatten(value)
-        for nest in nested:
-            current_row = [key]
-            current_row.extend(nest)
-            returned.append(current_row)
-
-    return returned
 
 
 def parametrize(params):
@@ -54,21 +60,35 @@ def parametrize(params):
     return returned
 
 
-def urlencode(params):
-    """Urlencode a multidimensional dict."""
+def urlencode(params, encode_list_key=False, array_braces=True):
+    """Urlencode a multidimensional dict.
+
+    >>> try:
+    ...     from urllib.parse import quote, unquote
+    ... except ImportError:
+    ...     from urllib import quote, unquote
+    ...
+    >>> unquote(urlencode({'a': {"b": [1, 2, 3]}}))
+    'a[b][]=1&a[b][]=2&a[b][]=3'
+    >>> unquote(urlencode({'a': {"b": [1, 2, 3]}}, array_braces=False))
+    'a[b]=1&a[b]=2&a[b]=3'
+    >>> unquote(urlencode({'a': {"b": [1, 2, 3]}}, encode_list_key=True))
+    'a[b][0]=1&a[b][1]=2&a[b][2]=3'
+
+    """
 
     # Not doing duck typing here. Will make debugging easier.
     if not isinstance(params, dict):
         raise TypeError("Only dicts are supported.")
 
-    params = flatten(params)
+    params = flatten(params, encode_list_key)
 
     url_params = OrderedDict()
     for param in params:
         value = param.pop()
 
         name = parametrize(param)
-        if isinstance(value, (list, tuple)):
+        if isinstance(value, (list, tuple)) and array_braces:
             name += "[]"
 
         url_params[name] = value
